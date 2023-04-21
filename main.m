@@ -108,9 +108,9 @@ for a_i = 1:size(A_data,2)
                 FO_X = X;
                 FO_H(i,:) = sum(FO_X, [1 2]);
 
-                FOC_X = convn(FO_X, kernel, 'valid');
-                FOC_H(i,:) = sum(FOC_X, [1 2]);
-                [h, w, k1] = size(FOC_X);
+                FOC_Z = convn(FO_X, kernel, 'valid');
+                FOC_H(i,:) = sum(FOC_Z, [1 2]);
+                [h, w, k1] = size(FOC_Z);
 
                % % get high-level semantic features
 
@@ -137,8 +137,8 @@ for a_i = 1:size(A_data,2)
                 FSW_E = convn(FOC_X, FS_Y_s, 'same');
                 FSW_H(i,:) = sum(FSW_E, [1 2]);
                 
-                FCW_Z_c_map = convn(FOC_X, FS_Y_c, 'valid');
-                FCW_T = FSW_E .* FCW_Z_c_map;
+                FCW_T_c_map = convn(FOC_X, FS_Y_c, 'valid');
+                FCW_T = FSW_E .* FCW_T_c_map;
                 FCW_H(i,:) = sum(FCW_T, [1 2]);
 
                 fprintf(1,'\b\b\b\b\b\b%6d', i);
